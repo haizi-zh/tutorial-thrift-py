@@ -5,10 +5,10 @@ Tutorials of Thrift clients and servers in Python
 
 * `server`/`client`: whether to start a server or connect to an existing one
 * `host`: the address of the Thrift server, default is `localhost`
-* `port`: the port of the Thrift server, default is `port`
-* `transport`: the transport type, default is `TBufferedTransport`
-* `protocol`: the protocol type, default is `TBinaryProtocol`
-* `server-type`: the type of the Thrift server, default is `TSimpleServer`
+* `port`: the port of the Thrift server, default is `8473`
+* `transport`: the transport type, default is `buffered`
+* `protocol`: the protocol type, default is `binary`
+* `server-type`: the type of the Thrift server, default is `simple`
 
 ## Usage
 
