@@ -1,8 +1,9 @@
+# coding=utf-8
 from thrift.server.TServer import TSimpleServer, TThreadedServer, TThreadPoolServer
 from thrift.transport import TSocket
 from thrift.transport import TTransport
 from thrift.protocol import TBinaryProtocol, TJSONProtocol, TCompactProtocol
-from example import ThriftService
+from users import userservice
 
 
 class ThriftServiceHandler:
@@ -62,13 +63,30 @@ def client(host, port, transport_type='buffered', protocol_type='binary'):
     protocol = protocol_map[protocol_type](transport)
     transport.open()
 
-    thrift_client = ThriftService.Client(protocol)
+    thrift_client = userservice.Client(protocol)
 
     pong = thrift_client.ping()
     print 'ping => %s' % pong
 
-    value = 2
-    print '%d inc => %d' % (value, thrift_client.inc(value))
+    # user = thrift_client.login('13699851562', '000999', '')
+    # user = thrift_client.login('haizi.zh@qq.com', '123456', '')
+    try:
+        # user = thrift_client.login('13699851562', '000999', '')
+        # user = thrift_client.login('15313380327', '123456', '')
+        # print user.secretKey
+        # u2 = thrift_client.loginByOAuth('011331690e7c6ccee1e8bee05fbac255', 'weixin')
+
+        # print thrift_client.login('haizi.zh@qq.com', '123456', 'app')
+        from users import ttypes
+
+        print thrift_client.login('10000000000', '69982400', 'app')
+        user = thrift_client.getUserById(100056, [ttypes.UserInfoProp.PROMOTION_CODE], 100056)
+        print user
+        # print thrift_client.login('15313380327', '123456', 'app')
+        # print thrift_client.acceptContactRequest(u'56989c80b36c28ff3a0cfa36')
+        # thrift_client.isContact(100012, 100056)
+    except Exception, e:
+        print e
 
 
 def main():
